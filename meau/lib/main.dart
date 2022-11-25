@@ -1,6 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'App.dart';
+import 'app.dart';
 
 void main() {
   runApp(const Main());

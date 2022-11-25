@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:meau/widgets/MainTitle.dart';
+import 'package:meau/widgets/main_title.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({super.key});
@@ -13,7 +13,7 @@ class IntroScreen extends StatelessWidget {
       color: Colors.white,
       child: SafeArea(
         child: Column(
-          children: <Widget>[MainTitle()],
+          children: <Widget>[MainTitle(title: "TELA de tele tela yay")],
         ),
       ),
     );
