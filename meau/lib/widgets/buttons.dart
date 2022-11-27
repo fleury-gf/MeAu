@@ -12,9 +12,12 @@ class StandardButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      child: Text(buttonText),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 80),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: Text(buttonText),
+      ),
     );
   }
 }
