@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Textbox extends StatelessWidget {
-  const Textbox(
+class TextInput extends StatelessWidget {
+  const TextInput(
       {super.key,
       required this.controller,
       this.isPassword = false,
@@ -12,10 +12,13 @@ class Textbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      obscureText: isPassword,
-      decoration: InputDecoration(hintText: placeholder),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: TextFormField(
+        controller: controller,
+        obscureText: isPassword,
+        decoration: InputDecoration(hintText: placeholder),
+      ),
     );
   }
 }
