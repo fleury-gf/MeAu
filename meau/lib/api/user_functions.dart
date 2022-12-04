@@ -30,3 +30,27 @@ Future<String> signUp(CreateUserModel user) async {
   ;
   return "";
 }
+
+Future<String> signIn(String email, String password) async {
+  try {
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: password);
+  } catch (e) {
+    return e.toString();
+  }
+  ;
+  return "";
+}
+
+Future<String> signOut() async {
+  if (isLoggedIn()) {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {
+      return e.toString();
+    }
+    ;
+    return "";
+  }
+  return "não há usuário logado";
+}
