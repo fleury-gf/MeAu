@@ -22,6 +22,16 @@ class _HomeScreenState extends State<HomeScreen> {
           buttonText: "CADASTRAR ANIMAL",
           onPressed: () {
             if (isLoggedIn()) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RegisterAdoptionScreen(),
+                  ));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RegisterAdoptionScreen(),
+                  ));
             } else {
               Navigator.push(
                   context,
