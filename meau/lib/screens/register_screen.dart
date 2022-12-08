@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meau/api/user_functions.dart';
@@ -26,7 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final passwordConfirmController = TextEditingController();
   final phoneController = TextEditingController();
 
-  void _handleRegister() async {
+  void _handleRegister(BuildContext context) async {
     CreateUserModel newuser = CreateUserModel(
         nameController.text,
         ageController.text,
@@ -65,7 +64,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
       StandardButton(
         buttonText: "CADASTRAR",
-        onPressed: _handleRegister,
+        onPressed: () {
+          _handleRegister(context);
+        },
       )
     ]);
   }

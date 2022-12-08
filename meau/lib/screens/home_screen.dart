@@ -1,11 +1,10 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:meau/api/user_functions.dart';
-import 'package:meau/screens/register_screen.dart';
+import 'package:meau/screens/register_adoption_screen.dart';
 import 'package:meau/widgets/buttons.dart';
 import 'package:meau/widgets/screen_template.dart';
-import 'login_screen.dart';
+import 'login_tree_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,24 +19,27 @@ class _HomeScreenState extends State<HomeScreen> {
     log(isLoggedIn().toString());
     return ScreenTemplate(children: <Widget>[
       StandardButton(
-          buttonText: "Registro",
+          buttonText: "CADASTRAR ANIMAL",
+          onPressed: () {
+            if (isLoggedIn()) {
+            } else {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginTreeScreen(),
+                  ));
+            }
+          }),
+      StandardButton(
+          buttonText: "LOGIN",
           onPressed: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => RegisterScreen(),
+                  builder: (context) => LoginTreeScreen(),
                 ));
           }),
-      StandardButton(
-          buttonText: "Login",
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
-                ));
-          }),
-      StandardButton(
+      TextOnlyButton(
         buttonText: "Logout",
         onPressed: () async {
           await signOut();
