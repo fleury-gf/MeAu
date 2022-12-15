@@ -13,7 +13,8 @@ class CreatePetModel {
       this.ownerId,
       this.isAdopt,
       this.isFoster,
-      this.isHelp);
+      this.isHelp,
+      this.picture);
   final String nome;
   final String especie;
   final String sexo;
@@ -28,4 +29,5 @@ class CreatePetModel {
   final bool isAdopt;
   final bool isFoster;
   final bool isHelp;
+  final String picture;
 }

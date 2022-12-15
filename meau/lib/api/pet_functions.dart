@@ -18,6 +18,7 @@ Future<String> createPet(CreatePetModel pet) async {
       "isAdopt": pet.isAdopt,
       "isFoster": pet.isFoster,
       "isHelp": pet.isHelp,
+      "picture": pet.picture,
     });
   } on FirebaseException catch (e) {
     return e.code;

@@ -9,7 +9,8 @@ class CreateUserModel {
       this.telefone,
       this.username,
       this.password,
-      this.passwordConfirm);
+      this.passwordConfirm,
+      this.picture);
   final String nome;
   final String idade;
   final String email;
@@ -20,4 +21,5 @@ class CreateUserModel {
   final String username;
   final String password;
   final String passwordConfirm;
+  final String picture;
 }
