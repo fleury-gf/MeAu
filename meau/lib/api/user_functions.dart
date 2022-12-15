@@ -23,6 +23,7 @@ Future<String> signUp(CreateUserModel user) async {
       "endereco": user.endereco,
       "telefone": user.telefone,
       "username": user.username,
+      "picture": user.picture,
     });
   } catch (e) {
     return e.toString();
