@@ -4,6 +4,7 @@ import 'package:meau/api/user_functions.dart';
 import 'package:meau/screens/register_adoption_screen.dart';
 import 'package:meau/widgets/buttons.dart';
 import 'package:meau/widgets/screen_template.dart';
+import 'adopt_screen.dart';
 import 'login_tree_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,6 +20,23 @@ class _HomeScreenState extends State<HomeScreen> {
     log(isLoggedIn().toString());
     return ScreenTemplate(children: <Widget>[
       StandardButton(
+          buttonText: "ADOTAR",
+          onPressed: () {
+            if (isLoggedIn()) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AdoptScreen(),
+                  ));
+            } else {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginTreeScreen(),
+                  ));
+            }
+          }),
+      StandardButton(
           buttonText: "CADASTRAR ANIMAL",
           onPressed: () {
             if (isLoggedIn()) {
@@ -27,6 +45,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   MaterialPageRoute(
                     builder: (context) => RegisterAdoptionScreen(),
                   ));
+            } else {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginTreeScreen(),
+                  ));
+            }
+          }),
+      StandardButton(
+          buttonText: "MEUS PETS",
+          onPressed: () {
+            if (isLoggedIn()) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
