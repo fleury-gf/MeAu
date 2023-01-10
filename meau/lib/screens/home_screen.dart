@@ -57,23 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
             }
           }),
       StandardButton(
-          buttonText: "MEUS PETS",
-          onPressed: () {
-            if (isLoggedIn()) {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyPetsScreen(),
-                  ));
-            } else {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginTreeScreen(),
-                  ));
-            }
-          }),
-      StandardButton(
           buttonText: "LOGIN",
           onPressed: () {
             Navigator.push(
