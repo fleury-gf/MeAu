@@ -57,7 +57,7 @@ Future<List<PetModel>> getAllPetsForAdoption() async {
       pet.isAdopt = doc.get("isAdopt");
       pet.isFoster = doc.get("isFoster");
       pet.isHelp = doc.get("isHelp");
-
+      pet.picture = doc.get("picture");
       pets.add(pet);
     }
   } catch (e) {
@@ -98,7 +98,7 @@ Future<List<PetModel>> getUserPets(String userid) async {
       pet.isAdopt = doc.get("isAdopt");
       pet.isFoster = doc.get("isFoster");
       pet.isHelp = doc.get("isHelp");
-
+      pet.picture = doc.get("picture");
       pets.add(pet);
     }
   } catch (e) {

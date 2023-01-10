@@ -55,3 +55,7 @@ Future<String> signOut() async {
   }
   return "não há usuário logado";
 }
+
+String CurrentUser() {
+  return FirebaseAuth.instance.currentUser!.uid;
+}

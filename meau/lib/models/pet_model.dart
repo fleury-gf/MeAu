@@ -33,24 +33,25 @@ class CreatePetModel {
 }
 
 class PetModel {
-  PetModel({
-    this.id = "",
-    this.nome = "",
-    this.especie = "",
-    this.sexo = "",
-    this.porte = "",
-    this.idade = "",
-    this.temperamento = "",
-    this.saude = "",
-    this.doencas = "",
-    this.exigencias = "",
-    this.necessidades = "",
-    this.sobre = "",
-    this.ownerId = "",
-    this.isAdopt = false,
-    this.isFoster = false,
-    this.isHelp = false,
-  });
+  PetModel(
+      {this.id = "",
+      this.nome = "",
+      this.especie = "",
+      this.sexo = "",
+      this.porte = "",
+      this.idade = "",
+      this.temperamento = "",
+      this.saude = "",
+      this.doencas = "",
+      this.exigencias = "",
+      this.necessidades = "",
+      this.sobre = "",
+      this.ownerId = "",
+      this.isAdopt = false,
+      this.isFoster = false,
+      this.isHelp = false,
+      this.picture = "",
+      this.hasInterest = false});
 
   String id;
   String nome;
@@ -65,7 +66,9 @@ class PetModel {
   String necessidades;
   String sobre;
   String ownerId;
+  String picture;
   bool isAdopt;
   bool isFoster;
   bool isHelp;
+  bool hasInterest;
 }
