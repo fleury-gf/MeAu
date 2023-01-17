@@ -72,7 +72,7 @@ class _RegisterAdoptionScreenState extends State<RegisterAdoptionScreen> {
   final sobreController = TextEditingController();
   final pictureController = TextEditingController();
 
-  bool isAdopt = false;
+  bool isAdopt = true;
   bool isFoster = false;
   bool isHelp = false;
 
