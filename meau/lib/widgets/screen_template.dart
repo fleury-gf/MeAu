@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meau/widgets/custom_drawer.dart';
 
 class ScreenTemplate extends StatelessWidget {
   const ScreenTemplate({super.key, this.title = "", required this.children});
@@ -8,7 +9,7 @@ class ScreenTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      drawer: null,
+      drawer: CustomDrawer(),
       body: Container(
         color: Colors.white,
         child: CustomScrollView(
