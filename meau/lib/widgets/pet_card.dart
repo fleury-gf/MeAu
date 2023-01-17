@@ -3,6 +3,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:meau/models/pet_model.dart';
+import 'package:meau/models/user_model.dart';
+import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:meau/api/user_functions.dart';
+import 'package:meau/models/user_model.dart';
 
 class PetCard extends StatelessWidget {
   const PetCard({
@@ -10,6 +16,11 @@ class PetCard extends StatelessWidget {
     required this.pet,
     this.isOwner = false,
   });
+
+  // const UserPetCard({
+  //   super.key,
+  //   required this.CurrentUserData,
+  // });
 
   final PetModel pet;
   final bool isOwner;
@@ -176,6 +187,13 @@ class PetCard extends StatelessWidget {
                                               child: Text("Adotar"),
                                               onPressed: () {
                                                 Navigator.of(context).pop();
+                                                createAdoptionRequest(
+                                                    pet.id,
+                                                    pet.ownerId,
+                                                    pet.nome,
+                                                    // CurrentUserData.nome,
+                                                    FirebaseAuth.instance
+                                                        .currentUser!.uid);
                                                 showDialog(
                                                     context: context,
                                                     builder:
@@ -228,4 +246,19 @@ class PetCard extends StatelessWidget {
       ]),
     );
   }
+}
+
+Future<String> createAdoptionRequest(
+    String pet_id, String owner_id, String pet_name, String person_id) async {
+  try {
+    await FirebaseFirestore.instance.collection("adoption_request").doc().set({
+      "pet_id": pet_id,
+      "owner_id": owner_id,
+      "pet_nome": pet_name,
+      "person_id": person_id
+    });
+  } on FirebaseException catch (e) {
+    return e.code;
+  }
+  return "";
 }
