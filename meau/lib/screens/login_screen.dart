@@ -18,17 +18,6 @@ class LoginScreen extends StatefulWidget {
 
 void AdoptionNotification(BuildContext context) async {
   try {
-    // BOTÕES
-    Widget cancelButton = TextButton(
-      child: Text("Aceitar"),
-      onPressed: () {},
-    );
-
-    Widget continueButton = TextButton(
-      child: Text("Recusar"),
-      onPressed: () {},
-    );
-
     String pets = '';
     String current_user_id = FirebaseAuth.instance.currentUser!.uid;
     print("achado " + current_user_id);
@@ -37,12 +26,27 @@ void AdoptionNotification(BuildContext context) async {
         .instance
         .collection("adoption_request")
         .where("owner_id", isEqualTo: current_user_id)
+        .where("seen", isEqualTo: false)
         .get();
 
     for (var doc in docsRef.docs) {
       quantidade = quantidade + 1;
-      pets = pets + " " + doc.get("pet_nome");
+      pets = pets + doc.get("pet_nome") + ", ";
     }
+    pets = pets.replaceRange(pets.length - 2, null, ".");
+
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        // for (var doc in docsRef.docs) {
+        //   await FirebaseFirestore.instance
+        //       .collection("adoption_request")
+        //       .doc(doc.id)
+        //       .update({"seen": true});
+        // }
+        Navigator.of(context).pop();
+      },
+    );
 
     if (quantidade > 0) {
       showDialog(
@@ -52,8 +56,7 @@ void AdoptionNotification(BuildContext context) async {
               title: Text("Pedido de Adoção"),
               content: Text("Animais: " + pets),
               actions: [
-                cancelButton,
-                continueButton,
+                okButton,
               ],
             );
           });

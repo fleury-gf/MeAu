@@ -10,6 +10,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meau/api/user_functions.dart';
 import 'package:meau/models/user_model.dart';
 
+import '../api/pet_functions.dart';
+
 class PetCard extends StatelessWidget {
   const PetCard({
     super.key,
@@ -246,19 +248,4 @@ class PetCard extends StatelessWidget {
       ]),
     );
   }
-}
-
-Future<String> createAdoptionRequest(
-    String pet_id, String owner_id, String pet_name, String person_id) async {
-  try {
-    await FirebaseFirestore.instance.collection("adoption_request").doc().set({
-      "pet_id": pet_id,
-      "owner_id": owner_id,
-      "pet_nome": pet_name,
-      "person_id": person_id
-    });
-  } on FirebaseException catch (e) {
-    return e.code;
-  }
-  return "";
 }

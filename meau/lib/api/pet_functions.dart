@@ -111,3 +111,30 @@ Future<List<PetModel>> getUserPets(String userid) async {
 
   return pets;
 }
+
+Future<String> createAdoptionRequest(
+    String pet_id, String owner_id, String pet_name, String person_id) async {
+  try {
+    QuerySnapshot<Map<String, dynamic>> request = await FirebaseFirestore
+        .instance
+        .collection("adoption_request")
+        .where("pet_id", isEqualTo: pet_id)
+        .where("person_id", isEqualTo: person_id)
+        .get();
+    if (request.docs.isEmpty == true) {
+      await FirebaseFirestore.instance
+          .collection("adoption_request")
+          .doc()
+          .set({
+        "pet_id": pet_id,
+        "owner_id": owner_id,
+        "pet_nome": pet_name,
+        "person_id": person_id,
+        "seen": false
+      });
+    }
+  } on FirebaseException catch (e) {
+    return e.code;
+  }
+  return "";
+}
