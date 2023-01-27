@@ -18,6 +18,7 @@ class LoginScreen extends StatefulWidget {
 
 void AdoptionNotification(BuildContext context) async {
   try {
+    NavigatorState navigator = Navigator.of(context);
     String pets = '';
     String current_user_id = FirebaseAuth.instance.currentUser!.uid;
     print("achado " + current_user_id);
@@ -37,14 +38,14 @@ void AdoptionNotification(BuildContext context) async {
 
     Widget okButton = TextButton(
       child: Text("OK"),
-      onPressed: () {
-        // for (var doc in docsRef.docs) {
-        //   await FirebaseFirestore.instance
-        //       .collection("adoption_request")
-        //       .doc(doc.id)
-        //       .update({"seen": true});
-        // }
-        Navigator.of(context).pop();
+      onPressed: () async {
+        for (var doc in docsRef.docs) {
+          await FirebaseFirestore.instance
+              .collection("adoption_request")
+              .doc(doc.id)
+              .update({"seen": true});
+        }
+        navigator.pop();
       },
     );
 
