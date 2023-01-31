@@ -145,16 +145,17 @@ Future<List<AdoptionRequestModel>> getUserRequests(String userid) async {
     QuerySnapshot<Map<String, dynamic>> docsRef = await FirebaseFirestore
         .instance
         .collection("adoption_request")
-        .where("ownerId", isEqualTo: userid)
+        .where("owner_id", isEqualTo: userid)
         .get();
 
     for (var doc in docsRef.docs) {
       AdoptionRequestModel request = AdoptionRequestModel();
 
       request.pet_id = doc.get("pet_id");
-      request.pet_name = doc.get("pet_name");
+      request.pet_name = doc.get("pet_nome");
       request.owner_id = doc.get("owner_id");
       request.person_id = doc.get("person_id");
+      requests.add(request);
     }
   } catch (e) {
     log(e.toString());
