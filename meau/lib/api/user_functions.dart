@@ -30,7 +30,7 @@ Future<String> signUp(CreateUserModel user) async {
   } catch (e) {
     return e.toString();
   }
-  ;
+
   return "";
 }
 
@@ -52,7 +52,7 @@ Future<String> signOut() async {
     } catch (e) {
       return e.toString();
     }
-    ;
+
     return "";
   }
   return "não há usuário logado";

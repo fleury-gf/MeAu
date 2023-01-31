@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:meau/api/user_functions.dart';
 import 'package:meau/screens/home_screen.dart';
@@ -71,14 +71,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
   void _handleLogin(BuildContext context) async {
-    // showDialog(
-    //     context: context,
-    //     builder: (BuildContext context) {
-    //       return AlertDialog(
-    //         title: Text("Adoção"),
-    //         content: Text("Pedido de adoção Enviado!!!"),
-    //       );
-    //     });
     await signIn(emailcontroller.text, passwordcontroller.text);
     if (!mounted) return;
     Navigator.pop(context);

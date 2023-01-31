@@ -1,7 +1,6 @@
 import 'dart:developer';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:meau/api/user_functions.dart';
 
 import '../models/pet_model.dart';
 
@@ -137,4 +136,29 @@ Future<String> createAdoptionRequest(
     return e.code;
   }
   return "";
+}
+
+Future<List<AdoptionRequestModel>> getUserRequests(String userid) async {
+  List<AdoptionRequestModel> requests = [];
+
+  try {
+    QuerySnapshot<Map<String, dynamic>> docsRef = await FirebaseFirestore
+        .instance
+        .collection("adoption_request")
+        .where("ownerId", isEqualTo: userid)
+        .get();
+
+    for (var doc in docsRef.docs) {
+      AdoptionRequestModel request = AdoptionRequestModel();
+
+      request.pet_id = doc.get("pet_id");
+      request.pet_name = doc.get("pet_name");
+      request.owner_id = doc.get("owner_id");
+      request.person_id = doc.get("person_id");
+    }
+  } catch (e) {
+    log(e.toString());
+  }
+
+  return requests;
 }

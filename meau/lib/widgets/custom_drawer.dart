@@ -173,6 +173,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
                             },
                           ),
                           DrawerItem(
+                            title: "Notificações",
+                            onTap: () {
+                              Navigator.pop(context);
+                              Navigator.of(context)
+                                  .pushReplacement(MaterialPageRoute(
+                                      builder: (context) => MyPetsScreen(
+                                            user: currentUser!,
+                                          )));
+                            },
+                          ),
+                          DrawerItem(
                             title: "Favoritos",
                             onTap: () {},
                           ),

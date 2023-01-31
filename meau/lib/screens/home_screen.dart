@@ -1,13 +1,12 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:meau/api/pet_functions.dart';
+
 import 'package:meau/api/user_functions.dart';
 import 'package:meau/screens/register_adoption_screen.dart';
 import 'package:meau/widgets/buttons.dart';
 import 'package:meau/widgets/screen_template.dart';
 import 'adopt_screen.dart';
 import 'login_tree_screen.dart';
-import 'my_pets_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

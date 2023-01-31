@@ -1,8 +1,4 @@
-import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:meau/api/pet_functions.dart';
 import 'package:meau/models/pet_model.dart';
 import 'package:meau/widgets/pet_card.dart';

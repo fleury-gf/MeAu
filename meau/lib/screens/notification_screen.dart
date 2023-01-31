@@ -7,15 +7,15 @@ import '../models/user_model.dart';
 import '../widgets/pet_card.dart';
 import '../widgets/screen_template.dart';
 
-class MyPetsScreen extends StatefulWidget {
-  const MyPetsScreen({super.key, required this.user});
+class NotificationScreen extends StatefulWidget {
+  const NotificationScreen({super.key, required this.user});
   final UserModel user;
   @override
-  State<MyPetsScreen> createState() => _MyPetsScreenState();
+  State<NotificationScreen> createState() => _NotificationScreenState();
 }
 
-class _MyPetsScreenState extends State<MyPetsScreen> {
-  List<PetModel> pets = [];
+class _NotificationScreenState extends State<NotificationScreen> {
+  List<AdoptionRequestModel> requests = [];
   @override
   void initState() {
     setPets();
@@ -23,19 +23,20 @@ class _MyPetsScreenState extends State<MyPetsScreen> {
   }
 
   void setPets() async {
-    List<PetModel> petsaux = await getUserPets(widget.user.id);
+    List<AdoptionRequestModel> requestsaux =
+        await getUserRequests(widget.user.id);
     setState(() {
-      pets = petsaux;
+      requests = requestsaux;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return ScreenTemplate(
-      title: "Meus pets",
+      title: "Meus requests",
       children: [
         Column(
-          children: pets.map((pet) => PetCard(pet: pet)).toList(),
+          children: requests.map((pet) => PetCard(pet: pet_id)).toList(),
         ),
       ],
     );
