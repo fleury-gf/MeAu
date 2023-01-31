@@ -35,7 +35,8 @@ class _MyPetsScreenState extends State<MyPetsScreen> {
       title: "Meus pets",
       children: [
         Column(
-          children: pets.map((pet) => PetCard(pet: pet)).toList(),
+          children:
+              pets.map((pet) => PetCard(pet: pet, isOwner: true)).toList(),
         ),
       ],
     );

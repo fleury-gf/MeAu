@@ -36,8 +36,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
       title: "Meus requests",
       children: [
         Column(
-          children: requests.map((pet) => PetCard(pet: pet_id)).toList(),
-        ),
+            //children: requests.map((pet) => PetCard(pet: pet_id)).toList(),
+            ),
       ],
     );
   }

@@ -9,6 +9,7 @@ import '../api/user_functions.dart';
 import '../models/user_model.dart';
 import '../screens/adopt_screen.dart';
 import '../screens/my_pets_screen.dart';
+import '../screens/notification_screen.dart';
 import '../screens/register_adoption_screen.dart';
 import 'drawer_dropdown_item.dart';
 import 'drawer_item.dart';
@@ -178,7 +179,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                               Navigator.pop(context);
                               Navigator.of(context)
                                   .pushReplacement(MaterialPageRoute(
-                                      builder: (context) => MyPetsScreen(
+                                      builder: (context) => NotificationScreen(
                                             user: currentUser!,
                                           )));
                             },
