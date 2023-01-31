@@ -126,7 +126,6 @@ class PetCard extends StatelessWidget {
                                                     pet.exigencias),
                                                 Divider(),
                                                 Text("Sobre: " + pet.sobre),
-                                                // Text("OwnerId: " + pet.ownerId)
                                               ],
                                             ),
                                           ),

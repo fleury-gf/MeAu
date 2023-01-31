@@ -12,15 +12,34 @@ import 'package:meau/models/user_model.dart';
 
 import '../api/pet_functions.dart';
 
-class AdoptionRequestCard extends StatelessWidget {
-  const AdoptionRequestCard(
-      {super.key, required this.request, required this.person});
+class AdoptionRequestCard extends StatefulWidget {
+  const AdoptionRequestCard({super.key, required this.request});
 
   final AdoptionRequestModel request;
-  final UserModel person;
+
+  @override
+  State<AdoptionRequestCard> createState() => _AdoptionRequestCardState();
+}
+
+class _AdoptionRequestCardState extends State<AdoptionRequestCard> {
+  UserModel person = new UserModel();
+
+  @override
+  void initState() {
+    setPerson();
+    super.initState();
+  }
+
+  setPerson() async {
+    UserModel _person = await getUser(widget.request.person_id);
+    setState(() {
+      person = _person;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    log(person.nome);
     return Container(
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -90,29 +109,23 @@ class AdoptionRequestCard extends StatelessWidget {
                                               height: 200,
                                               width: double.infinity,
                                               child: Image.memory(
-                                                  base64Decode(pet.picture),
+                                                  base64Decode(person.picture),
                                                   fit: BoxFit.fill)),
-                                          Text("Nome: " + pet.nome),
+                                          Text("Nome: " + person.nome),
                                           Divider(),
-                                          Text("Especie: " + pet.especie),
+                                          Text("Idade: " + person.idade),
                                           Divider(),
-                                          Text("Sexo: " + pet.sexo),
+                                          Text("Email: " + person.email),
                                           Divider(),
-                                          Text("Porte: " + pet.porte),
+                                          Text("Estado: " + person.estado),
                                           Divider(),
-                                          Text("Idade: " + pet.idade),
+                                          Text("Cidade: " + person.cidade),
                                           Divider(),
-                                          Text("Temperamento: " +
-                                              pet.temperamento),
+                                          Text("Endereço: " + person.endereco),
                                           Divider(),
-                                          Text("Saude: " + pet.saude),
+                                          Text("Telefone: " + person.telefone),
                                           Divider(),
-                                          Text("Doencas: " + pet.doencas),
-                                          Divider(),
-                                          Text("Exigencias: " + pet.exigencias),
-                                          Divider(),
-                                          Text("Sobre: " + pet.sobre),
-                                          // Text("OwnerId: " + pet.ownerId)
+                                          Text("Username: " + person.username),
                                         ],
                                       ),
                                     ),
@@ -120,22 +133,6 @@ class AdoptionRequestCard extends StatelessWidget {
                                         child: Text("Adotar"),
                                         onPressed: () {
                                           Navigator.of(context).pop();
-                                          createAdoptionRequest(
-                                              pet.id,
-                                              pet.ownerId,
-                                              pet.nome,
-                                              // CurrentUserData.nome,
-                                              FirebaseAuth
-                                                  .instance.currentUser!.uid);
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: Text("Adoção"),
-                                                  content: Text(
-                                                      "Pedido de adoção Enviado!!!"),
-                                                );
-                                              });
                                         }),
                                   ],
                                 ),
@@ -147,10 +144,10 @@ class AdoptionRequestCard extends StatelessWidget {
                       Icons.info,
                       size: 20.0,
                     ),
-                    label: Text(request.pet_name),
+                    label: Text(widget.request.pet_name),
                   ),
                   Text(
-                    "Candidato a adoção" + person.nome.toUpperCase(),
+                    "Candidato a adoção:" + person.nome.toUpperCase(),
                   ),
                 ],
               ),

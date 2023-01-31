@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../api/pet_functions.dart';
+import '../api/user_functions.dart';
 import '../models/pet_model.dart';
 import '../models/user_model.dart';
+import '../widgets/adoption_request_card.dart';
 import '../widgets/pet_card.dart';
 import '../widgets/screen_template.dart';
 
@@ -18,11 +20,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
   List<AdoptionRequestModel> requests = [];
   @override
   void initState() {
-    setPets();
+    setRequests();
     super.initState();
   }
 
-  void setPets() async {
+  void setRequests() async {
     List<AdoptionRequestModel> requestsaux =
         await getUserRequests(widget.user.id);
     setState(() {
@@ -36,8 +38,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
       title: "Meus requests",
       children: [
         Column(
-            //children: requests.map((pet) => PetCard(pet: pet_id)).toList(),
-            ),
+          children: requests
+              .map((request) => AdoptionRequestCard(request: request))
+              .toList(),
+        ),
       ],
     );
   }
