@@ -150,7 +150,7 @@ Future<List<AdoptionRequestModel>> getUserRequests(String userid) async {
 
     for (var doc in docsRef.docs) {
       AdoptionRequestModel request = AdoptionRequestModel();
-
+      request.request_id = doc.id;
       request.pet_id = doc.get("pet_id");
       request.pet_name = doc.get("pet_nome");
       request.owner_id = doc.get("owner_id");
@@ -162,4 +162,29 @@ Future<List<AdoptionRequestModel>> getUserRequests(String userid) async {
   }
 
   return requests;
+}
+
+Future<String> deleteAdoptionRequest(id) async {
+  try {
+    await FirebaseFirestore.instance
+        .collection("adoption_request")
+        .doc(id)
+        .delete();
+  } on FirebaseException catch (e) {
+    return e.code;
+  }
+  return "Success";
+}
+
+Future<String> changePetOwner(pet_id, person_id) async {
+  try {
+    await FirebaseFirestore.instance
+        .collection("pets")
+        .doc(pet_id)
+        .update({"ownerId": person_id, "isAdopt": false});
+  } on FirebaseException catch (e) {
+    return e.code;
+  }
+
+  return "";
 }

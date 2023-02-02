@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:meau/models/pet_model.dart';
@@ -9,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meau/api/user_functions.dart';
 import 'package:meau/models/user_model.dart';
+import 'package:meau/screens/notification_screen.dart';
 
 import '../api/pet_functions.dart';
 
@@ -129,11 +131,34 @@ class _AdoptionRequestCardState extends State<AdoptionRequestCard> {
                                         ],
                                       ),
                                     ),
+                                    Divider(),
                                     ElevatedButton(
-                                        child: Text("Adotar"),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        }),
+                                        child: Text("Chat"), onPressed: () {}),
+                                    Divider(),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        ElevatedButton(
+                                            child: Text("Aceitar"),
+                                            onPressed: () {
+                                              changePetOwner(
+                                                  widget.request.pet_id,
+                                                  widget.request.person_id);
+                                              deleteAdoptionRequest(
+                                                  widget.request.request_id);
+                                              Navigator.of(context).pop();
+                                            }),
+                                        SizedBox(width: 30),
+                                        ElevatedButton(
+                                            child: Text("Recusar"),
+                                            onPressed: () {
+                                              deleteAdoptionRequest(
+                                                  widget.request.request_id);
+                                              Navigator.of(context).pop();
+                                            }),
+                                      ],
+                                    )
                                   ],
                                 ),
                               ),
@@ -144,10 +169,10 @@ class _AdoptionRequestCardState extends State<AdoptionRequestCard> {
                       Icons.info,
                       size: 20.0,
                     ),
-                    label: Text(widget.request.pet_name),
+                    label: Text(person.nome),
                   ),
                   Text(
-                    "Candidato a adoção:" + person.nome.toUpperCase(),
+                    "Pet: " + widget.request.pet_name.toUpperCase(),
                   ),
                 ],
               ),

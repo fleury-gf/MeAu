@@ -75,10 +75,12 @@ class PetModel {
 
 class AdoptionRequestModel {
   AdoptionRequestModel(
-      {this.pet_id = "",
+      {this.request_id = "",
+      this.pet_id = "",
       this.owner_id = "",
       this.pet_name = "",
       this.person_id = ""});
+  String request_id;
   String pet_id;
   String owner_id;
   String pet_name;
