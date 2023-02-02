@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:meau/models/pet_model.dart';
