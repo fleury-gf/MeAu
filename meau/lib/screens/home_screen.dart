@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:meau/api/user_functions.dart';
@@ -64,15 +65,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (context) => LoginTreeScreen(),
                 ));
           }),
-      TextOnlyButton(
-        buttonText: "Logout",
-        onPressed: () async {
-          await signOut();
-          if (!mounted) return;
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()));
-        },
-      ),
+      if (FirebaseAuth.instance.currentUser?.uid != null)
+        TextOnlyButton(
+          buttonText: "Logout",
+          onPressed: () async {
+            await signOut();
+            if (!mounted) return;
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()));
+          },
+        ),
     ]);
   }
 }

@@ -33,7 +33,9 @@ void AdoptionNotification(BuildContext context) async {
       quantidade = quantidade + 1;
       pets = pets + doc.get("pet_nome") + ", ";
     }
-    pets = pets.replaceRange(pets.length - 2, null, ".");
+    if (pets.length >= 2) {
+      pets = pets.replaceRange(pets.length - 2, null, ".");
+    }
 
     Widget okButton = TextButton(
       child: Text("OK"),

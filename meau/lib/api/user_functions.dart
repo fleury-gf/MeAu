@@ -19,6 +19,7 @@ Future<String> signUp(CreateUserModel user) async {
         .doc(usercredential.user?.uid.toString())
         .set({
       "nome": user.nome,
+      "email": user.email,
       "idade": user.idade,
       "estado": user.estado,
       "cidade": user.cidade,
@@ -67,7 +68,7 @@ Future<UserModel> getUser(String uid) async {
         await FirebaseFirestore.instance.collection("users").doc(uid).get();
 
     user.id = uid;
-    // user.email = docRef.get("email");
+    user.email = docRef.get("email");
     user.idade = docRef.get("idade");
     user.cidade = docRef.get("cidade");
     user.telefone = docRef.get("telefone");

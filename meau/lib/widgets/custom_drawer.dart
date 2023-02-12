@@ -160,7 +160,82 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         children: [
                           DrawerItem(
                             title: "Meu perfil",
-                            onTap: () {},
+                            onTap: () {
+                              showGeneralDialog(
+                                  context: context,
+                                  barrierDismissible: true,
+                                  barrierLabel:
+                                      MaterialLocalizations.of(context)
+                                          .modalBarrierDismissLabel,
+                                  barrierColor: Colors.black45,
+                                  transitionDuration:
+                                      const Duration(milliseconds: 200),
+                                  pageBuilder: (BuildContext context,
+                                      Animation animation,
+                                      Animation secondaryAnimation) {
+                                    return Center(
+                                        child: Container(
+                                      width: MediaQuery.of(context).size.width -
+                                          30,
+                                      height:
+                                          MediaQuery.of(context).size.height -
+                                              70,
+                                      padding: EdgeInsets.all(20),
+                                      color: Colors.white,
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            DefaultTextStyle(
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 7, 1, 0),
+                                                  fontSize: 20),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(
+                                                      height: 200,
+                                                      width: double.infinity,
+                                                      child: Image.memory(
+                                                          base64Decode(
+                                                              currentUser!
+                                                                  .picture),
+                                                          fit: BoxFit.fill)),
+                                                  Text("Nome: " +
+                                                      currentUser!.nome),
+                                                  Divider(),
+                                                  Text("Idade: " +
+                                                      currentUser!.idade),
+                                                  Divider(),
+                                                  Text("Email: " +
+                                                      currentUser!.email),
+                                                  Divider(),
+                                                  Text("Estado: " +
+                                                      currentUser!.estado),
+                                                  Divider(),
+                                                  Text("Cidade: " +
+                                                      currentUser!.cidade),
+                                                  Divider(),
+                                                  Text("Endereço: " +
+                                                      currentUser!.endereco),
+                                                  Divider(),
+                                                  Text("Telefone: " +
+                                                      currentUser!.telefone),
+                                                  Divider(),
+                                                  Text("Username: " +
+                                                      currentUser!.username),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ));
+                                  });
+                            },
                           ),
                           DrawerItem(
                             title: "Meus pets",
@@ -183,10 +258,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                             user: currentUser!,
                                           )));
                             },
-                          ),
-                          DrawerItem(
-                            title: "Favoritos",
-                            onTap: () {},
                           ),
                           DrawerItem(
                             title: "Chat",
@@ -228,48 +299,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => const AdoptScreen()));
                   },
-                ),
-              ],
-            ),
-          ),
-          DrawerDropdownItem(
-            onTap: _toggleInfoDropdown,
-            // color: Design.accentBlue,
-            icon: Icons.info,
-            title: "Informações",
-            dropdownToggled: _infoToggled,
-          ),
-          Container(
-            height: _infoListHeight,
-            // color: Design.white2,
-            child: Column(
-              children: [
-                DrawerItem(
-                  title: "Dicas",
-                  onTap: () {},
-                ),
-                DrawerItem(
-                  title: "Termo de adoção",
-                  onTap: () {},
-                ),
-              ],
-            ),
-          ),
-          DrawerDropdownItem(
-            onTap: _toggleSettingsDropdown,
-            // color: Design.lightestGray,
-            icon: Icons.settings,
-            title: "Configurações",
-            dropdownToggled: _settingsToggled,
-          ),
-          Container(
-            height: _settingsListHeight,
-            // color: Design.white2,
-            child: Column(
-              children: [
-                DrawerItem(
-                  title: "Privacidade",
-                  onTap: () {},
                 ),
               ],
             ),
