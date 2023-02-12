@@ -19,7 +19,7 @@ class _ScreenTemplateState extends State<ScreenTemplate> {
   void initState() {
     super.initState();
     timer = Timer.periodic(
-        Duration(seconds: 10), (Timer t) => AdoptionNotification(context));
+        Duration(seconds: 5), (Timer t) => AdoptionNotification(context));
   }
 
   @override

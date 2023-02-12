@@ -1,15 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:meau/models/pet_model.dart';
 import 'package:meau/models/user_model.dart';
-import 'dart:developer';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meau/api/user_functions.dart';
-import 'package:meau/models/user_model.dart';
-import 'package:meau/screens/notification_screen.dart';
 
 import '../api/pet_functions.dart';
 
