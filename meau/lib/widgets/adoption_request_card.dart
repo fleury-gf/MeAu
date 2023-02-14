@@ -144,8 +144,6 @@ class _AdoptionRequestCardState extends State<AdoptionRequestCard> {
                                     ElevatedButton(
                                         child: Text("Chat"),
                                         onPressed: () {
-                                          getChatroom(
-                                              currentUser!.id, person.id);
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(

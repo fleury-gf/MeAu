@@ -8,6 +8,7 @@ import 'package:meau/screens/login_tree_screen.dart';
 import '../api/user_functions.dart';
 import '../models/user_model.dart';
 import '../screens/adopt_screen.dart';
+import '../screens/chat_selescreen.dart';
 import '../screens/my_pets_screen.dart';
 import '../screens/notification_screen.dart';
 import '../screens/register_adoption_screen.dart';
@@ -261,7 +262,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           ),
                           DrawerItem(
                             title: "Chat",
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pop(context);
+                              Navigator.of(context)
+                                  .pushReplacement(MaterialPageRoute(
+                                      builder: (context) => ChatSelectScreen(
+                                            user: currentUser!,
+                                          )));
+                            },
                           ),
                         ],
                       ),
