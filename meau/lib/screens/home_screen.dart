@@ -1,13 +1,13 @@
 import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:meau/api/pet_functions.dart';
+
 import 'package:meau/api/user_functions.dart';
 import 'package:meau/screens/register_adoption_screen.dart';
 import 'package:meau/widgets/buttons.dart';
 import 'package:meau/widgets/screen_template.dart';
 import 'adopt_screen.dart';
 import 'login_tree_screen.dart';
-import 'my_pets_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -65,15 +65,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (context) => LoginTreeScreen(),
                 ));
           }),
-      TextOnlyButton(
-        buttonText: "Logout",
-        onPressed: () async {
-          await signOut();
-          if (!mounted) return;
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()));
-        },
-      ),
+      if (FirebaseAuth.instance.currentUser?.uid != null)
+        TextOnlyButton(
+          buttonText: "Logout",
+          onPressed: () async {
+            await signOut();
+            if (!mounted) return;
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()));
+          },
+        ),
     ]);
   }
 }

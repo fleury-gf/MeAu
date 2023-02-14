@@ -19,6 +19,7 @@ Future<String> signUp(CreateUserModel user) async {
         .doc(usercredential.user?.uid.toString())
         .set({
       "nome": user.nome,
+      "email": user.email,
       "idade": user.idade,
       "estado": user.estado,
       "cidade": user.cidade,
@@ -30,7 +31,7 @@ Future<String> signUp(CreateUserModel user) async {
   } catch (e) {
     return e.toString();
   }
-  ;
+
   return "";
 }
 
@@ -52,7 +53,7 @@ Future<String> signOut() async {
     } catch (e) {
       return e.toString();
     }
-    ;
+
     return "";
   }
   return "não há usuário logado";

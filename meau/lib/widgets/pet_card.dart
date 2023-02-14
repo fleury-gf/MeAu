@@ -1,8 +1,9 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:meau/models/pet_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../api/pet_functions.dart';
 
 class PetCard extends StatelessWidget {
   const PetCard({
@@ -37,31 +38,7 @@ class PetCard extends StatelessWidget {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // isOwner
-              //     ? pet.hasInterest
-              //         ? IconButton(
-              //             onPressed: () {
-              //               log("toggle interest");
-              //             },
-              //             icon: const Icon(
-              //               Icons.error,
-              //               size: 24,
-              //             ),
-              //           )
-              //         : const SizedBox(
-              //             height: 42,
-              //           )
-              //     : IconButton(
-              //         onPressed: () {
-              //           log("toggle favorite");
-              //         },
-              //         icon: const Icon(
-              //           Icons.favorite_outline,
-              //           size: 24,
-              //         ),
-              //       ),
-            ],
+            children: [],
           ),
         ),
         SizedBox(
@@ -76,35 +53,98 @@ class PetCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
-                mainAxisAlignment: isOwner
-                    ? MainAxisAlignment.center
-                    : MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: isOwner
                     ? [
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            showGeneralDialog(
+                                context: context,
+                                barrierDismissible: true,
+                                barrierLabel: MaterialLocalizations.of(context)
+                                    .modalBarrierDismissLabel,
+                                barrierColor: Colors.black45,
+                                transitionDuration:
+                                    const Duration(milliseconds: 200),
+                                pageBuilder: (BuildContext context,
+                                    Animation animation,
+                                    Animation secondaryAnimation) {
+                                  return Center(
+                                      child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width - 30,
+                                    height:
+                                        MediaQuery.of(context).size.height - 70,
+                                    padding: EdgeInsets.all(20),
+                                    color: Colors.white,
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          DefaultTextStyle(
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 7, 1, 0),
+                                                fontSize: 20),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                    height: 200,
+                                                    width: double.infinity,
+                                                    child: Image.memory(
+                                                        base64Decode(
+                                                            pet.picture),
+                                                        fit: BoxFit.fill)),
+                                                Text("Nome: " + pet.nome),
+                                                Divider(),
+                                                Text("Especie: " + pet.especie),
+                                                Divider(),
+                                                Text("Sexo: " + pet.sexo),
+                                                Divider(),
+                                                Text("Porte: " + pet.porte),
+                                                Divider(),
+                                                Text("Idade: " + pet.idade),
+                                                Divider(),
+                                                Text("Temperamento: " +
+                                                    pet.temperamento),
+                                                Divider(),
+                                                Text("Saude: " + pet.saude),
+                                                Divider(),
+                                                Text("Doencas: " + pet.doencas),
+                                                Divider(),
+                                                Text("Exigencias: " +
+                                                    pet.exigencias),
+                                                Divider(),
+                                                Text("Sobre: " + pet.sobre),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ));
+                                });
+                          },
+                          icon: Icon(
+                            Icons.info,
+                            size: 20.0,
+                          ),
+                          label: Text(pet.nome),
+                        ),
                         Text(
-                          "0 NOVOS INTERESSADOS",
-                        )
+                          pet.sexo.toUpperCase(),
+                        ),
+                        Text(
+                          pet.idade.toUpperCase(),
+                        ),
+                        Text(
+                          pet.porte.toUpperCase(),
+                        ),
                       ]
                     : [
-//                         ElevatedButton.icon(
-//                             onPressed: () {
-//                               // Navigator.of(context).pop(),
-//                               // Navigator.of(context).pop();
-
-// showDialog(context: context, builder: (BuildContext context){
-//     return AlertDialog(
-//       title: Text("Success"),
-//       content: Text("Saved successfully")
-//     );
-// };)
-
-//                             },
-//                             icon: Icon(
-//                               Icons.favorite,
-//                               size: 20.0,
-//                             ),
-//                             label: Text("Adotar")),
-
                         ElevatedButton.icon(
                           onPressed: () {
                             showGeneralDialog(
@@ -176,6 +216,13 @@ class PetCard extends StatelessWidget {
                                               child: Text("Adotar"),
                                               onPressed: () {
                                                 Navigator.of(context).pop();
+                                                createAdoptionRequest(
+                                                    pet.id,
+                                                    pet.ownerId,
+                                                    pet.nome,
+                                                    // CurrentUserData.nome,
+                                                    FirebaseAuth.instance
+                                                        .currentUser!.uid);
                                                 showDialog(
                                                     context: context,
                                                     builder:
@@ -210,18 +257,6 @@ class PetCard extends StatelessWidget {
                         ),
                       ],
               ),
-              // isOwner
-              //     ? Row(
-              //         mainAxisAlignment: MainAxisAlignment.center,
-              //         children: [
-              //           Text(
-              //             "ADOÇÃO",
-              //           )
-              //         ],
-              //       )
-              //     : Text(
-              //         "pet.userAddress.toUpperCase()",
-              //       ),
             ],
           ),
         ),

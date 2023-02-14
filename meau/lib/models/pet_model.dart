@@ -72,3 +72,17 @@ class PetModel {
   bool isHelp;
   bool hasInterest;
 }
+
+class AdoptionRequestModel {
+  AdoptionRequestModel(
+      {this.request_id = "",
+      this.pet_id = "",
+      this.owner_id = "",
+      this.pet_name = "",
+      this.person_id = ""});
+  String request_id;
+  String pet_id;
+  String owner_id;
+  String pet_name;
+  String person_id;
+}

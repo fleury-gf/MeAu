@@ -32,10 +32,11 @@ class _MyPetsScreenState extends State<MyPetsScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenTemplate(
-      title: "Adotar",
+      title: "Meus pets",
       children: [
         Column(
-          children: pets.map((pet) => PetCard(pet: pet)).toList(),
+          children:
+              pets.map((pet) => PetCard(pet: pet, isOwner: true)).toList(),
         ),
       ],
     );
