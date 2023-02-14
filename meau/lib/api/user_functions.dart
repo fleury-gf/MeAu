@@ -99,3 +99,16 @@ Future<UserModel?> getCurrentUser() async {
 
   return currentUser;
 }
+
+Future<String?> getChatroom(String id1, String id2) async {
+  try {
+    await FirebaseFirestore.instance.collection("chatroom").doc(id1 + id2).set({
+      "id1": id1,
+      "id2": id2,
+    });
+  } on FirebaseException catch (e) {
+    return e.code;
+  }
+
+  return id1 + id2;
+}

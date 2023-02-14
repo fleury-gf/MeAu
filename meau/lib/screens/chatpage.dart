@@ -8,17 +8,27 @@ import '../models/user_model.dart';
 
 class chatpage extends StatefulWidget {
   String senderid;
-  chatpage({required this.senderid, required this.personid});
+
+  chatpage({
+    required this.senderid,
+    required this.personid,
+  });
   String personid;
   @override
-  _chatpageState createState() =>
-      _chatpageState(senderid: senderid, personid: personid);
+  _chatpageState createState() => _chatpageState(
+        senderid: senderid,
+        personid: personid,
+      );
 }
 
 class _chatpageState extends State<chatpage> {
   String senderid;
   String personid;
-  _chatpageState({required this.senderid, required this.personid});
+
+  _chatpageState({
+    required this.senderid,
+    required this.personid,
+  });
 
   final fs = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
@@ -104,6 +114,8 @@ class _chatpageState extends State<chatpage> {
                         'message': message.text.trim(),
                         'time': DateTime.now(),
                         'senderid': senderid,
+                        'sendername': currentUser!.nome,
+                        'chatroom': currentUser!.id + person.id
                       });
 
                       message.clear();

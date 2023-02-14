@@ -3,14 +3,20 @@ import 'package:flutter/material.dart';
 
 class messages extends StatefulWidget {
   String senderid;
-  messages({required this.senderid});
+
+  messages({
+    required this.senderid,
+  });
   @override
   _messagesState createState() => _messagesState(senderid: senderid);
 }
 
 class _messagesState extends State<messages> {
   String senderid;
-  _messagesState({required this.senderid});
+
+  _messagesState({
+    required this.senderid,
+  });
 
   Stream<QuerySnapshot> _messageStream = FirebaseFirestore.instance
       .collection('Messages')
@@ -57,7 +63,7 @@ class _messagesState extends State<messages> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       title: Text(
-                        qs['senderid'],
+                        qs['sendername'],
                         style: TextStyle(
                           fontSize: 15,
                         ),
