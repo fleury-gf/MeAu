@@ -1,11 +1,15 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:meau/api/messages.dart';
 import 'package:meau/models/pet_model.dart';
 import 'package:meau/models/user_model.dart';
 import 'package:meau/api/user_functions.dart';
 
 import '../api/pet_functions.dart';
+
+import '../screens/chatpage.dart';
 
 class AdoptionRequestCard extends StatefulWidget {
   const AdoptionRequestCard({super.key, required this.request});
@@ -126,7 +130,16 @@ class _AdoptionRequestCardState extends State<AdoptionRequestCard> {
                                     ),
                                     Divider(),
                                     ElevatedButton(
-                                        child: Text("Chat"), onPressed: () {}),
+                                        child: Text("Chat"),
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => chatpage(
+                                                  email: "rw@mail.com",
+                                                ),
+                                              ));
+                                        }),
                                     Divider(),
                                     Row(
                                       mainAxisAlignment:
