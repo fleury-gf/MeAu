@@ -3,28 +3,59 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meau/widgets/custom_drawer.dart';
 import '../api/messages.dart';
+import '../api/user_functions.dart';
+import '../models/user_model.dart';
 
 class chatpage extends StatefulWidget {
-  String email;
-  chatpage({required this.email});
+  String senderid;
+  chatpage({required this.senderid, required this.personid});
+  String personid;
   @override
-  _chatpageState createState() => _chatpageState(email: email);
+  _chatpageState createState() =>
+      _chatpageState(senderid: senderid, personid: personid);
 }
 
 class _chatpageState extends State<chatpage> {
-  String email;
-  _chatpageState({required this.email});
+  String senderid;
+  String personid;
+  _chatpageState({required this.senderid, required this.personid});
 
   final fs = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   final TextEditingController message = new TextEditingController();
+
+  UserModel person = new UserModel();
+  @override
+  void initState() {
+    setPerson();
+    _setCurrentUser();
+    super.initState();
+  }
+
+  setPerson() async {
+    UserModel _person = await getUser(personid);
+    setState(() {
+      person = _person;
+    });
+  }
+
+  UserModel? currentUser;
+
+  void _setCurrentUser() async {
+    UserModel? user = await getCurrentUser();
+    if (user != null) {
+      setState(() {
+        currentUser = user;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'data',
+          person.nome,
         ),
       ),
       drawer: CustomDrawer(),
@@ -36,7 +67,7 @@ class _chatpageState extends State<chatpage> {
             Container(
               height: MediaQuery.of(context).size.height * 0.79,
               child: messages(
-                email: email,
+                senderid: senderid,
               ),
             ),
             Row(
@@ -46,8 +77,8 @@ class _chatpageState extends State<chatpage> {
                     controller: message,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Color.fromARGB(255, 182, 232, 255),
-                      hintText: 'message',
+                      fillColor: Color.fromARGB(255, 170, 222, 247),
+                      hintText: 'mensagem',
                       enabled: true,
                       contentPadding: const EdgeInsets.only(
                           left: 14.0, bottom: 8.0, top: 8.0),
@@ -72,7 +103,7 @@ class _chatpageState extends State<chatpage> {
                       fs.collection('Messages').doc().set({
                         'message': message.text.trim(),
                         'time': DateTime.now(),
-                        'email': email,
+                        'senderid': senderid,
                       });
 
                       message.clear();

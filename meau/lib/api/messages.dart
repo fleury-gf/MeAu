@@ -2,15 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class messages extends StatefulWidget {
-  String email;
-  messages({required this.email});
+  String senderid;
+  messages({required this.senderid});
   @override
-  _messagesState createState() => _messagesState(email: email);
+  _messagesState createState() => _messagesState(senderid: senderid);
 }
 
 class _messagesState extends State<messages> {
-  String email;
-  _messagesState({required this.email});
+  String senderid;
+  _messagesState({required this.senderid});
 
   Stream<QuerySnapshot> _messageStream = FirebaseFirestore.instance
       .collection('Messages')
@@ -43,7 +43,7 @@ class _messagesState extends State<messages> {
             return Padding(
               padding: const EdgeInsets.only(top: 8, bottom: 8),
               child: Column(
-                crossAxisAlignment: email == qs['email']
+                crossAxisAlignment: senderid == qs['senderid']
                     ? CrossAxisAlignment.end
                     : CrossAxisAlignment.start,
                 children: [
@@ -57,7 +57,7 @@ class _messagesState extends State<messages> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       title: Text(
-                        qs['email'],
+                        qs['senderid'],
                         style: TextStyle(
                           fontSize: 15,
                         ),

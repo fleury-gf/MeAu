@@ -26,6 +26,7 @@ class _AdoptionRequestCardState extends State<AdoptionRequestCard> {
   @override
   void initState() {
     setPerson();
+    _setCurrentUser();
     super.initState();
   }
 
@@ -34,6 +35,17 @@ class _AdoptionRequestCardState extends State<AdoptionRequestCard> {
     setState(() {
       person = _person;
     });
+  }
+
+  UserModel? currentUser;
+
+  void _setCurrentUser() async {
+    UserModel? user = await getCurrentUser();
+    if (user != null) {
+      setState(() {
+        currentUser = user;
+      });
+    }
   }
 
   @override
@@ -136,7 +148,8 @@ class _AdoptionRequestCardState extends State<AdoptionRequestCard> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) => chatpage(
-                                                  email: "rw@mail.com",
+                                                  personid: person.id,
+                                                  senderid: currentUser!.id,
                                                 ),
                                               ));
                                         }),
